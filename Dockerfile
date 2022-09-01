@@ -10,4 +10,6 @@ FROM alpine
 COPY --from=build /usr/local/src/goproxy/bin/ /usr/local/bin/
 RUN mkdir /data
 
+EXPOSE 8080
+
 ENTRYPOINT ["/usr/local/bin/goproxy"]

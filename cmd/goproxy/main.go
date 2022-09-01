@@ -5,6 +5,7 @@ import (
 	"errors"
 	"flag"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"strings"
@@ -43,6 +44,9 @@ func main() {
 			CacherMaxCacheBytes: *cacherMaxCacheBytes,
 			ProxiedSUMDBs:       strings.Split(*proxiedSUMDBs, ","),
 			TempDir:             *tempDir,
+		},
+		ConnState: func(conn net.Conn, event http.ConnState) {
+			log.Printf("addr: %s, changed state to: %s", conn.RemoteAddr(), event.String())
 		},
 	}
 
