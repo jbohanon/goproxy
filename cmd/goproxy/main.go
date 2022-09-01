@@ -4,7 +4,6 @@ import (
 	"crypto/tls"
 	"flag"
 	"log"
-	"net"
 	"net/http"
 	"os"
 	"strings"
@@ -13,7 +12,7 @@ import (
 )
 
 var (
-	address             = flag.String("address", "localhost:8080", "TCP address that the HTTP server listens on")
+	address             = flag.String("address", ":8080", "TCP address that the HTTP server listens on")
 	tlsCertFile         = flag.String("tls-cert-file", "", "path to the TLS certificate file")
 	tlsKeyFile          = flag.String("tls-key-file", "", "path to the TLS key file")
 	goBinName           = flag.String("go-bin-name", "go", "name of the Go binary")
@@ -43,9 +42,6 @@ func main() {
 			CacherMaxCacheBytes: *cacherMaxCacheBytes,
 			ProxiedSUMDBs:       strings.Split(*proxiedSUMDBs, ","),
 			TempDir:             *tempDir,
-		},
-		ConnState: func(conn net.Conn, event http.ConnState) {
-			log.Printf("addr: %s, changed state to: %s", conn.RemoteAddr(), event.String())
 		},
 	}
 
