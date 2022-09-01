@@ -271,6 +271,7 @@ func (g *Goproxy) load() {
 
 // ServeHTTP implements the [http.Handler].
 func (g *Goproxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+	log.Println("received request", *req)
 	g.loadOnce.Do(g.load)
 
 	switch req.Method {
