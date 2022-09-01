@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/tls"
-	"errors"
 	"flag"
 	"log"
 	"net"
@@ -59,7 +58,7 @@ func main() {
 		err = server.ListenAndServe()
 	}
 
-	if err != nil && !errors.Is(err, http.ErrServerClosed) {
+	if err != nil {
 		log.Printf("http server error: %v\n", err)
 		return
 	}
