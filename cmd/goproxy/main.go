@@ -48,8 +48,10 @@ func main() {
 
 	var err error
 	if *tlsCertFile != "" && *tlsKeyFile != "" {
+		log.Printf("starting TLS server on %v\n", *address)
 		err = server.ListenAndServeTLS(*tlsCertFile, *tlsKeyFile)
 	} else {
+		log.Printf("starting unsecured server on %v\n", *address)
 		err = server.ListenAndServe()
 	}
 
